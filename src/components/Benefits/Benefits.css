@@ -1,0 +1,304 @@
+/* ========================================================
+   WHY UPVC SECTION STYLES
+   ======================================================== */
+
+.benefits-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 40px;
+  align-items: center; /* Desktop view: Vertically center image & carousel */
+  position: relative;
+  z-index: 1;
+}
+
+/* Image container — Vertically centered on desktop */
+.benefits-image {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.benefits-image img {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-strong);
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  max-height: 380px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.benefits-image img:hover {
+  transform: scale(1.015);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Carousel wrapper */
+.benefits-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  min-width: 0; /* Prevent flex/grid overflow clipping blowout */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Viewport with smooth scroll & touch pan */
+.benefits-carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  border-radius: var(--radius-md);
+  touch-action: pan-y; /* Allows vertical scrolling while detecting horizontal swipes */
+  user-select: none;
+  cursor: grab;
+}
+
+.benefits-carousel-viewport:active {
+  cursor: grabbing;
+}
+
+/* Carousel sliding track */
+.benefits-carousel-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Each slide container */
+.benefits-carousel-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 4px; /* Room for card elevation hover shadows */
+}
+
+/* Slide inner grid */
+.benefits-carousel-slide-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: 100%;
+}
+
+/* Benefit Card */
+.benefit-card {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: var(--radius-md);
+  height: 100%;
+  min-height: 230px;
+  box-sizing: border-box;
+  transition: var(--transition);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+  background: var(--glass-bg-light-strong);
+}
+
+/* Custom SVG Icon badge */
+.benefit-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  background: rgba(17, 96, 63, 0.1);
+  color: var(--c-green-700);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.benefit-card:hover .benefit-icon {
+  background: var(--c-green-700);
+  color: var(--c-white);
+  transform: scale(1.08);
+}
+
+.benefit-icon svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.benefit-card h4 {
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  color: var(--c-green-900);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.benefit-card p {
+  font-size: var(--fs-small);
+  color: var(--c-text-gray);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Unified Carousel Navigation: Left Arrow + Pagination Dots + Right Arrow */
+.benefits-carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.carousel-nav-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(17, 96, 63, 0.22);
+  background: var(--c-white);
+  color: var(--c-green-800);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(10, 61, 44, 0.08);
+}
+
+.carousel-nav-btn:hover {
+  background: var(--c-green-800);
+  color: var(--c-white);
+  border-color: var(--c-green-800);
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(10, 61, 44, 0.18);
+}
+
+.carousel-nav-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* Pagination Dots */
+.carousel-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-dot {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  height: 8px;
+  border-radius: 4px;
+}
+
+.pagination-dot:not(.active) {
+  width: 8px;
+  background: rgba(17, 96, 63, 0.25);
+}
+
+.pagination-dot:not(.active):hover {
+  background: rgba(17, 96, 63, 0.55);
+}
+
+.pagination-dot.active {
+  width: 26px;
+  background: var(--c-green-700);
+  box-shadow: 0 2px 8px rgba(17, 96, 63, 0.3);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+  .benefits-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .benefits-image img {
+    height: 300px;
+    max-height: 300px;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .benefits-carousel-slide-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .benefit-card {
+    padding: 26px 20px;
+    min-height: 210px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .benefit-icon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .benefit-card h4 {
+    text-align: center;
+    width: 100%;
+  }
+
+  .benefit-card p {
+    text-align: center;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .carousel-nav-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .carousel-nav-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .benefits-carousel-nav {
+    margin-top: 22px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .benefits-image img {
+    height: 240px;
+    max-height: 240px;
+  }
+
+  .benefit-card {
+    padding: 24px 18px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .benefit-card h4 {
+    font-size: 1.15rem;
+    text-align: center;
+  }
+
+  .benefit-card p {
+    font-size: 0.92rem;
+    text-align: center;
+    max-width: 300px;
+  }
+}

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://upvcdekho.com
+
+# Sitemaps
+Sitemap: https://upvcdekho.com/sitemap.xml

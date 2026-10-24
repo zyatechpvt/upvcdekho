@@ -1,0 +1,332 @@
+/* ========================================================
+   OUR WORK / PROJECTS SECTION STYLES
+   ======================================================== */
+
+.work-filters-wrapper {
+  width: 100%;
+  margin-bottom: 36px;
+}
+
+.work-filters {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  background: var(--c-white);
+  border: 1.5px solid var(--c-green-100);
+  color: var(--c-text-gray);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--c-green-700);
+  color: var(--c-white);
+  border-color: var(--c-green-700);
+}
+
+/* ========================================================
+   CAROUSEL WRAPPER & DESKTOP GRID (DEFAULT)
+   ======================================================== */
+
+.work-carousel-wrapper {
+  width: 100%;
+}
+
+.work-carousel-viewport {
+  overflow: visible;
+  width: 100%;
+}
+
+.work-carousel-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.work-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 300px;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  background: var(--c-green-900);
+}
+
+.work-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: block;
+}
+
+.work-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Desktop: Overlay text is hidden by default, visible on hover */
+.work-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px 20px;
+  border-radius: 0;
+  border: none;
+  background: linear-gradient(to top, rgba(10, 61, 44, 0.95) 0%, rgba(10, 61, 44, 0.72) 65%, transparent 100%);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-card:hover .work-overlay {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.work-tag {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--c-green-700);
+  color: var(--c-white);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.work-overlay h4 {
+  color: var(--c-white);
+  font-size: var(--fs-h4);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.work-overlay p {
+  font-size: var(--fs-small);
+  color: var(--c-text-light);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Navigation controls hidden on desktop */
+.work-carousel-nav {
+  display: none;
+}
+
+.work-cta {
+  margin-top: 44px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  border-radius: var(--radius-md);
+}
+
+.work-cta h4 {
+  font-size: var(--fs-h4);
+  margin-bottom: 6px;
+  color: var(--c-green-900);
+}
+
+.work-cta p {
+  font-size: var(--fs-small);
+  color: var(--c-text-gray);
+}
+
+/* ========================================================
+   RESPONSIVE: TABLET
+   ======================================================== */
+
+@media (max-width: 900px) and (min-width: 769px) {
+  .work-carousel-track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========================================================
+   RESPONSIVE: MOBILE VIEW (CAROUSEL & HORIZONTAL TABS)
+   ======================================================== */
+
+@media (max-width: 768px) {
+  /* Tabs in 1 row, scrollable / swipeable horizontally */
+  .work-filters-wrapper {
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .work-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 4px 4px 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .work-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 9px 20px;
+    font-size: 0.88rem;
+  }
+
+  /* Carousel Viewport & Track */
+  .work-carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+    border-radius: var(--radius-md);
+    touch-action: pan-y;
+    user-select: none;
+    cursor: grab;
+  }
+
+  .work-carousel-viewport:active {
+    cursor: grabbing;
+  }
+
+  .work-carousel-track {
+    display: flex;
+    width: 100%;
+    gap: 0;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+  }
+
+  .work-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    height: 330px;
+    box-sizing: border-box;
+  }
+
+  /* Mobile text overlay */
+  .work-overlay {
+    opacity: 1;
+    transform: translateY(0);
+    background: linear-gradient(to top, rgba(10, 61, 44, 0.94) 0%, rgba(10, 61, 44, 0.6) 70%, transparent 100%);
+    padding: 18px 20px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .work-tag {
+    align-self: center;
+  }
+
+  .work-overlay h4 {
+    text-align: center;
+    font-size: 1.15rem;
+  }
+
+  .work-overlay p {
+    text-align: center;
+    font-size: 0.88rem;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Navigation Bar: Arrow Left + Dots + Arrow Right */
+  .work-carousel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .carousel-nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(17, 96, 63, 0.22);
+    background: var(--c-white);
+    color: var(--c-green-800);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(10, 61, 44, 0.08);
+  }
+
+  .carousel-nav-btn:hover {
+    background: var(--c-green-800);
+    color: var(--c-white);
+    border-color: var(--c-green-800);
+    transform: scale(1.08);
+  }
+
+  .carousel-nav-btn svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  .carousel-pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pagination-dot {
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    height: 8px;
+    border-radius: 4px;
+  }
+
+  .pagination-dot:not(.active) {
+    width: 8px;
+    background: rgba(17, 96, 63, 0.25);
+  }
+
+  .pagination-dot:not(.active):hover {
+    background: rgba(17, 96, 63, 0.55);
+  }
+
+  .pagination-dot.active {
+    width: 26px;
+    background: var(--c-green-700);
+    box-shadow: 0 2px 8px rgba(17, 96, 63, 0.3);
+  }
+}
+
+@media (max-width: 560px) {
+  .work-card {
+    height: 310px;
+  }
+
+  .work-cta {
+    padding: 24px;
+    text-align: center;
+    justify-content: center;
+  }
+}

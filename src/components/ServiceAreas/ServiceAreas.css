@@ -1,0 +1,123 @@
+.area-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 28px;
+  margin-bottom: 40px;
+}
+
+.area-card {
+  padding: 34px;
+}
+
+.area-pin {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  background: rgba(17, 96, 63, 0.1);
+  color: var(--c-green-700);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: var(--transition);
+}
+
+.area-card:hover .area-pin {
+  background: var(--c-green-700);
+  color: var(--c-white);
+  transform: scale(1.06);
+}
+
+.area-pin svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.area-card h4 {
+  font-size: var(--fs-h3);
+  margin-bottom: 10px;
+}
+
+.area-card p {
+  font-size: var(--fs-body);
+  color: var(--c-text-gray);
+  margin-bottom: 24px;
+}
+
+.area-map {
+  padding: 10px;
+  min-height: 280px;
+}
+
+.area-map iframe {
+  border-radius: var(--radius-md);
+  min-height: 260px;
+}
+
+.nearby-title {
+  font-size: var(--fs-h4);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.nearby-chips {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.chip {
+  background: var(--c-green-100);
+  color: var(--c-green-800);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 50px;
+}
+
+@media (max-width: 900px) {
+  .area-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .area-card.primary {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 20px;
+  }
+
+  .area-card.primary .area-pin {
+    margin: 0 auto 16px auto;
+  }
+
+  .area-card.primary h4,
+  .area-card.primary p {
+    text-align: center;
+  }
+
+  .area-card.primary .btn {
+    align-self: center;
+  }
+
+  .nearby-chips {
+    margin-left: -19px;
+    margin-right: -19px;
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 5px;
+  }
+
+  .nearby-chips .chip {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+}

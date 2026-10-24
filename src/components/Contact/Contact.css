@@ -1,0 +1,264 @@
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-info {
+  padding: 32px;
+}
+
+.contact-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.contact-logo {
+  max-width: 190px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.contact-info h3 {
+  font-size: var(--fs-h3);
+  margin-bottom: 4px;
+}
+
+.owner-line {
+  font-size: var(--fs-small);
+  color: var(--c-green-700);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: var(--fs-small);
+  color: var(--c-text-gray);
+  line-height: 1.6;
+}
+
+.contact-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(17, 96, 63, 0.1);
+  color: var(--c-green-700);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contact-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.contact-phone-link {
+  color: var(--c-green-800);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.contact-phone-link:hover {
+  color: var(--c-green-600);
+}
+
+.contact-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.contact-btns .btn {
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  padding: 13px 14px;
+}
+
+.btn-inline-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.contact-form {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(10, 61, 44, 0.15);
+  background: rgba(255, 255, 255, 0.6);
+  font-size: var(--fs-small);
+  font-family: 'Inter', sans-serif;
+  color: var(--c-text-dark);
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--c-green-500);
+}
+
+.full-input {
+  grid-column: 1 / -1;
+}
+
+.full-btn {
+  width: 100%;
+  padding: 16px;
+}
+
+.form-success {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.success-icon-badge {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(17, 96, 63, 0.12);
+  color: var(--c-green-700);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.success-icon-badge svg {
+  width: 26px;
+  height: 26px;
+}
+
+.form-success h3 {
+  color: var(--c-green-700);
+  margin-bottom: 10px;
+}
+
+.map-wrap {
+  height: 360px;
+  padding: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.map-wrap iframe {
+  border-radius: var(--radius-md);
+}
+
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 20px;
+  }
+
+  .contact-logo-wrap {
+    margin: 0 auto 20px auto;
+  }
+
+  .contact-info h3,
+  .owner-line {
+    text-align: center;
+  }
+
+  .info-list {
+    align-items: center;
+    width: 100%;
+  }
+
+  .info-list li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .contact-icon {
+    margin: 0 auto;
+  }
+
+  .contact-phone-link {
+    text-align: center;
+  }
+
+  .contact-btns {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .contact-btns .btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 12px 8px;
+    font-size: 0.88rem;
+    justify-content: center;
+  }
+
+  .contact-btns .btn .btn-inline-icon {
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+  }
+}
