@@ -63,7 +63,7 @@ export default function About() {
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
-    const shareText = `*तिरुपति बालाजी - स्टेनलेस स्टील रेलिंग एण्ड फर्नीचर*\n(UPVC Windows & SSR Railing)\n\n👤 राजुराम बिश्नोई: +91 8976922929 (WhatsApp)\n\n📍 पता: पंचायत समिति के पास, सूर्य मण्डल के सामने, सीकर रोड़, फतेहपुर शेखावाटी (राज.)\n\n🌐 वेबसाईट देखें: ${window.location.origin}`;
+    const shareText = `*तिरुपति बालाजी - स्टेनलेस स्टील रेलिंग एण्ड फर्नीचर*\n(UPVC Windows & SSR Railing)\n\n👤 राजुराम बिश्नोई: +91 8976922929 (WhatsApp)\n👤 रमेश बिश्नोई: +91 9571553447\n\n📍 पता: पंचायत समिति के पास, सूर्य मण्डल के सामने, सीकर रोड़, फतेहपुर शेखावाटी (राज.)\n\n🌐 वेबसाईट देखें: ${window.location.origin}`;
 
     if (navigator.share) {
       try {
@@ -132,9 +132,22 @@ export default function About() {
         <div className="digital-card-wrapper">
           {/* The Physical-Style Digital Visiting Card Canvas */}
           <div className="dcard-canvas">
-            {/* Top Contacts Bar: TB Steel logo on left, Rajuram Bishnoi on right */}
+            {/* Top Contacts Bar: Ramesh on left, TB Steel emblem center, Rajuram on right */}
             <div className="dcard-top-row">
-              {/* Emblem: TB Steel */}
+              {/* Contact: Ramesh Bishnoi (Left) */}
+              <div className="dcard-person dcard-person-left">
+                <span className="dcard-person-name">रमेश बिश्नोई</span>
+                <a href="tel:+919571553447" className="dcard-person-phone" title="Call Ramesh Bishnoi">
+                  <span className="wa-icon-inline">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <span className="phone-prefix">M.</span> 9571553447
+                </a>
+              </div>
+
+              {/* Emblem: TB Steel (Center) */}
               <div className="dcard-center-emblem" title="Tirupati Balaji Steel & Fabrication">
                 <div className="dcard-emblem-roof">
                   <svg viewBox="0 0 60 30" className="dcard-roof-svg">
@@ -152,7 +165,7 @@ export default function About() {
                 </div>
               </div>
 
-              {/* Contact: Rajuram Bishnoi */}
+              {/* Contact: Rajuram Bishnoi (Right) */}
               <div className="dcard-person dcard-person-right">
                 <span className="dcard-person-name">राजुराम बिश्नोई</span>
                 <a href="tel:+918976922929" className="dcard-person-phone wa-phone" title="Call or WhatsApp Rajuram Bishnoi">
