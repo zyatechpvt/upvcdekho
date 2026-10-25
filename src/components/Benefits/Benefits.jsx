@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import benefitImg from '../../assets/benefit-main.jpg';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import benefitVideo from '../../assets/video.mp4';
 import './Benefits.css';
 
 const benefits = [
@@ -66,6 +66,12 @@ export default function Benefits() {
   const touchEndXRef = useRef(0);
   const touchEndYRef = useRef(0);
   const isDraggingRef = useRef(false);
+
+  // Video playback state
+  const videoRef = useRef(null);
+  const videoContainerRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -153,6 +159,85 @@ export default function Benefits() {
     }
   };
 
+  // --- Video control handlers ---
+  const togglePlay = useCallback((e) => {
+    if (e) e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    if (!video.paused) {
+      video.pause();
+      setIsPlaying(false);
+    } else {
+      video.play().catch(() => {});
+      setIsPlaying(true);
+    }
+  }, []);
+
+  const toggleMute = useCallback((e) => {
+    if (e) e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    const nextMuted = !video.muted;
+    video.muted = nextMuted;
+    setIsMuted(nextMuted);
+  }, []);
+
+  // Desktop: play on hover with sound, pause on leave
+  const handleVideoMouseEnter = () => {
+    if (!isMobile && videoRef.current) {
+      const video = videoRef.current;
+      video.muted = false;
+      setIsMuted(false);
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch(() => {
+            // If browser blocks unmuted playback before direct user interaction, fallback to muted playback
+            video.muted = true;
+            setIsMuted(true);
+            video.play().then(() => setIsPlaying(true)).catch(() => {});
+          });
+      }
+    }
+  };
+
+  const handleVideoMouseLeave = () => {
+    if (!isMobile && videoRef.current) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  // Mobile: IntersectionObserver — autoplay when video scrolls into view
+  useEffect(() => {
+    if (!isMobile) return;
+    const video = videoRef.current;
+    const container = videoContainerRef.current;
+    if (!video || !container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Mobile autoplay must be muted per mobile browser policy
+          video.muted = true;
+          setIsMuted(true);
+          video.play().catch(() => {});
+          setIsPlaying(true);
+        } else {
+          video.pause();
+          setIsPlaying(false);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
   return (
     <section id="benefits" className="section">
       <div className="blob blob-green" style={{ width: 340, height: 340, bottom: -100, left: -100 }}></div>
@@ -168,8 +253,72 @@ export default function Benefits() {
         </div>
 
         <div className="benefits-layout">
-          <div className="benefits-image">
-            <img src={benefitImg} alt="Modern UPVC window installation" />
+          <div
+            className="benefits-image"
+            ref={videoContainerRef}
+            onMouseEnter={handleVideoMouseEnter}
+            onMouseLeave={handleVideoMouseLeave}
+            onClick={togglePlay}
+          >
+            <video
+              ref={videoRef}
+              src={benefitVideo}
+              muted={isMuted}
+              loop
+              playsInline
+              preload="auto"
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onVolumeChange={() => {
+                if (videoRef.current) {
+                  setIsMuted(videoRef.current.muted);
+                }
+              }}
+              aria-label="Modern UPVC window installation video"
+            />
+
+            {/* Play / Pause + Mute / Unmute overlay controls */}
+            <div className={`video-controls ${!isPlaying ? 'is-paused' : ''}`}>
+              <button
+                type="button"
+                className="video-control-btn"
+                onClick={togglePlay}
+                aria-label={isPlaying ? 'Pause' : 'Play'}
+                title={isPlaying ? 'Pause' : 'Play'}
+              >
+                {isPlaying ? (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="6" y="4" width="4" height="16" rx="1" />
+                    <rect x="14" y="4" width="4" height="16" rx="1" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="6,4 20,12 6,20" />
+                  </svg>
+                )}
+              </button>
+              <button
+                type="button"
+                className="video-control-btn"
+                onClick={toggleMute}
+                aria-label={isMuted ? 'Unmute' : 'Mute'}
+                title={isMuted ? 'Unmute' : 'Mute'}
+              >
+                {isMuted ? (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" />
+                    <line x1="23" y1="9" x2="17" y2="15" />
+                    <line x1="17" y1="9" x2="23" y2="15" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" />
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
 
           <div className="benefits-carousel-wrapper">
